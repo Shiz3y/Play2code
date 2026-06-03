@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <form class="auth-card" action="php/register.php" method="POST">
+            <h2 style="color:var(--accent); margin-bottom:20px;">РЕГИСТРАЦИЯ</h2>
+            <input type="text" name="username" placeholder="Имя ниндзя" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit" class="btn btn-accent" style="width:100%; margin-top:20px;">СОЗДАТЬ АККАУНТ</button>
+            <p style="margin-top:15px; font-size:0.9rem;">Есть аккаунт? <a href="login.html" style="color:var(--accent)">Вход</a></p>
+        </form>
+    </div>
+</body>
+</html>

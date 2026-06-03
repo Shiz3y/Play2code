@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - CodeLearning</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🎮 Code<span style="color: white">Learning</span></div>
+            <a href="index.html" class="btn btn-primary">← Назад</a>
+        </header>
+
+        <div class="profile-container">
+            <div class="profile-card">
+                <img src="assets/images/avatars/default.png" id="profile-avatar" class="profile-avatar" alt="Avatar">
+                <h2 id="profile-username">Загрузка...</h2>
+                
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <h3 id="profile-xp">0</h3>
+                        <p>XP Очков</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>1</h3>
+                        <p>Уровень</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>0</h3>
+                        <p>Игр сыграно</p>
+                    </div>
+                </div>
+
+                <div class="avatar-form">
+                    <h3>📷 Сменить аватар</h3>
+                    <form action="php/update_avatar.php" method="POST" enctype="multipart/form-data" style="margin-top: 15px;">
+                        <input type="file" name="avatar" accept="image/*" required>
+                        <button type="submit" class="btn btn-accent">Загрузить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('php/get_profile.php')
+            .then(r => r.json())
+            .then(data => {
+                if (!data.logged_in) {
+                    window.location.href = 'login.html';
+                } else {
+                    document.getElementById('profile-username').innerText = data.username;
+                    document.getElementById('profile-xp').innerText = data.xp;
+                    if (data.avatar && data.avatar !== 'default.png') {
+                        document.getElementById('profile-avatar').src = 'assets/images/avatars/' + data.avatar;
+                    } else {
+                        document.getElementById('profile-avatar').src = 'assets/images/avatars/default.png';
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Profile error:', err);
+                window.location.href = 'login.html';
+            });
+    </script>
+</body>
+</html>
